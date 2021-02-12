@@ -31,3 +31,4 @@ var signJWT = function (user, callback) {
         callback(error, null);
     }
 };
+exports.default = signJWT;

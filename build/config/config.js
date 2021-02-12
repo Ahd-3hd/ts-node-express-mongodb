@@ -4,22 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 var MONGO_OPTIONS = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     socketTimeoutMS: 30000,
     keepAlive: true,
     poolSize: 50,
-    autoIndex: false,
-    retryWrites: false
+    autoIndex: true,
+    retryWrites: false,
+    useCreateIndex: true
 };
-var MONGO_URI = process.env.MOGO_URI || "mongodb+srv://ahd2:ahd123123@ahd.q1zv7.mongodb.net/books?retryWrites=true&w=majority";
-dotenv_1.default.config();
-var SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || 'localhost';
+var MONGO_URI = process.env.MONGO_URI || "";
+var SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || '';
 var SERVER_PORT = process.env.SERVER_PORT || 1337;
 var SERVER_TOKEN_EXPIRETIME = process.env.SERVER_TOKEN_EXPIRETIME || 3600;
-var SERVER_TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER || 'issuername';
-var SERVER_TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || 'secret';
+var SERVER_TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER || '';
+var SERVER_TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || '';
 var SERVER = {
     hostname: SERVER_HOSTNAME,
     port: SERVER_PORT,

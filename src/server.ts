@@ -12,23 +12,23 @@ const router = express();
 
 /** Connect to mongodb */
 mongoose
-    .connect(config.mongo.uri, config.mongo.options)
-    .then((result) => {
-        logging.info(NAMESPACE, 'Connected to MongoDB');
-    })
-    .catch((error) => {
-        logging.error(NAMESPACE, error.message, error);
-    });
+  .connect(config.mongo.uri, config.mongo.options)
+  .then((result) => {
+    logging.info(NAMESPACE, 'Connected to MongoDB');
+  })
+  .catch((error) => {
+    logging.error(NAMESPACE, error.message, error);
+  });
 
 /** Logging the request */
 
 router.use((req, res, next) => {
-    logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
+  logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
 
-    res.on('finish', () => {
-        logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`);
-    });
-    next();
+  res.on('finish', () => {
+    logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`);
+  });
+  next();
 });
 
 /** Parse the request */
@@ -39,14 +39,14 @@ router.use(bodyParser.json());
 /** Rules of API */
 
 router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
-        return res.status(200).json({});
-    }
-    next();
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
+    return res.status(200).json({});
+  }
+  next();
 });
 
 /** Routes */
@@ -55,10 +55,10 @@ router.use('/users', userRoutes);
 /** Error Handling */
 
 router.use((req, res, next) => {
-    const error = new Error('not found');
-    return res.status(404).json({
-        message: error.message
-    });
+  const error = new Error('not found');
+  return res.status(404).json({
+    message: error.message
+  });
 });
 
 /** Create the server */

@@ -43,7 +43,7 @@ router.use(function (req, res, next) {
     next();
 });
 /** Routes */
-router.use('/user', user_1.default);
+router.use('/users', user_1.default);
 /** Error Handling */
 router.use(function (req, res, next) {
     var error = new Error('not found');
